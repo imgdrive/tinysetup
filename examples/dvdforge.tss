@@ -1,4 +1,4 @@
-; run "tsc setup.tss" in command line to create DVDForge installer.
+; run "tsc setup.tss" in command line to create installer.
 
 [Setup]
 OutputFile=dvdforge_%v.exe
@@ -8,13 +8,20 @@ AppMutex=DVDForge_Mutex
 AppClassName=DVDForgeClass
 Publisher=Yubsoft
 
-; use by:
-; 1. get shortcut icon
-; 2. get exe to run InstallParam: MainExe -i
+; MainExe is used to:
+;   1. get shortcut icon
+;   2. run "MainExe InstallParam" to config app
 MainExe=dvdforge.exe
 
 ; if 1 install to c:\program files, else c:\program files (x86)
 Native64BitApp=1
+
+; by default application will install to %ProgramFiles% folder:
+;   "c:\program files" if (Native64BitApp=1 and 64-bit_OS) or 32-bit_OS
+;   "c:\program files (x86)" if Native64BitApp=0 and 64-bit_OS
+;
+; %LocalAppData% C:\Users\<user>\AppData\Local\Programs
+;DefaultDirName=%LocalAppData%\DVDForge
 
 Compression=lzma
 SolidCompression=yes
@@ -24,7 +31,7 @@ UninstallParam=-xu
 
 [Languages]
 Default.ini
-ChineseSimplified.ini
+French.ini
 Italian.ini
 
 [Files]
